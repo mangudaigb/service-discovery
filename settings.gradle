@@ -1,0 +1,3 @@
+rootProject.name = 'agent-exchange'
+
+includeBuild "../agent-exchange-client"

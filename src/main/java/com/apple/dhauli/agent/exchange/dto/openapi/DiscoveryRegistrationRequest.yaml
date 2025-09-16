@@ -1,0 +1,176 @@
+openapi: 3.0.3
+info:
+  title: Service Discovery Registration API
+  version: 1.0.0
+
+paths:
+  /register/service:
+    post:
+      summary: Register a Service Pod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ServiceRegistrationRequest'
+      responses:
+        '200':
+          description: Service registered successfully
+  /register/agent:
+    post:
+      summary: Register an Agent Pod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRegistrationRequest'
+      responses:
+        '200':
+          description: Agent registered successfully
+  /register/mcp:
+    post:
+      summary: Register an MCP Pod
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/McpServerRegistrationRequest'
+      responses:
+        '200':
+          description: MCP registered successfully
+
+components:
+  schemas:
+    Identity:
+      type: object
+      required:
+        - id
+        - name
+        - version
+      properties:
+        instanceId:
+          type: string
+        name:
+          type: string
+        version:
+          type: string
+
+    Network:
+      type: object
+      required:
+        - ip
+        - port
+        - protocol
+      properties:
+        ip:
+          type: string
+        port:
+          type: string
+        protocol:
+          type: string
+
+    Health:
+      type: object
+      properties:
+        healthUrl:
+          type: string
+        checkInterval:
+          type: integer
+          description: Check interval in seconds
+        timeoutInterval:
+          type: integer
+          description: Timeout interval in seconds
+
+    Topology:
+      type: object
+      properties:
+        environment:
+          type: string
+        region:
+          type: string
+        datacenter:
+          type: string
+        availabilityZone:
+          type: string
+        rack:
+          type: string
+        node:
+          type: string
+
+    Security:
+      type: object
+      properties:
+        authToken:
+          type: string
+        serviceAccount:
+          type: string
+        identityProvider:
+          type: string
+        jwt:
+          type: string
+        tlsEnabled:
+          type: object
+          properties:
+            enabled:
+              type: boolean
+            mutual:
+              type: boolean
+
+    ServiceRegistrationRequest:
+      type: object
+      required:
+        - identity
+        - network
+        - health
+      properties:
+        identity:
+          $ref: '#/components/schemas/Identity'
+        network:
+          $ref: '#/components/schemas/Network'
+        health:
+          $ref: '#/components/schemas/Health'
+        topology:
+          $ref: '#/components/schemas/Topology'
+        security:
+          $ref: '#/components/schemas/Security'
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Service specific metadata
+
+    AgentRegistrationRequest:
+      allOf:
+        - $ref: '#/components/schemas/ServiceRegistrationRequest'
+        - type: object
+          required:
+            - agentCardUrl
+          properties:
+            agentCardUrl:
+              type: string
+              format: uri
+              description: URL where the service discovery fetches the agent card
+            agentMetadata:
+              type: object
+              additionalProperties:
+                type: string
+              description: Agent-specific metadata
+
+    McpServerRegistrationRequest:
+      allOf:
+        - $ref: '#/components/schemas/ServiceRegistrationRequest'
+        - type: object
+          required:
+            - mcpServerUrl
+          properties:
+            mcpServerUrl:
+              type: string
+              format: uri
+              description: MCP server endpoint URL
+            mcpMetadata:
+              type: object
+              additionalProperties:
+                type: string
+              description: MCP-specific metadata

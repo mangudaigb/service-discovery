@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: agent-exchange
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
+      password: pass
+      client-type: jedis
+
+zookeeper:
+  connect: "localhost:2181"
+  session:
+    timeout: 1000
+    retryInterval: 15
+  paths:
+    base: /dhauli
+    leader: /dhauli/discovery-service
+    services: /dhauli/services
+    agents: /dhauli/agents
+    mcp-servers: /dhauli/mcp-servers
+    functions: /dhauli/functions
