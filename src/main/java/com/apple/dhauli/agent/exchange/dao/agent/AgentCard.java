@@ -54,112 +54,112 @@ public record AgentCard(
         private List<String> tagList;
         private List<String> qualifierList;
 
-        public Builder protocolVersion(String protocolVersion) {
+        public Builder withProtocolVersion(String protocolVersion) {
             this.protocolVersion = protocolVersion;
             return this;
         }
 
-        public Builder version(String version) {
+        public Builder withVersion(String version) {
             this.version = version;
             return this;
         }
 
-        public Builder name(String name) {
+        public Builder withName(String name) {
             this.name = name;
             return this;
         }
 
-        public Builder description(String description) {
+        public Builder withDescription(String description) {
             this.description = description;
             return this;
         }
 
-        public Builder url(String url) {
+        public Builder withUrl(String url) {
             this.url = url;
             return this;
         }
 
-        public Builder preferredTransport(String preferredTransport) {
+        public Builder withPreferredTransport(String preferredTransport) {
             this.preferredTransport = preferredTransport;
             return this;
         }
 
-        public Builder additionalInterfaceList(List<AgentInterface> additionalInterfaceList) {
+        public Builder withAdditionalInterfaceList(List<AgentInterface> additionalInterfaceList) {
             this.additionalInterfaceList = additionalInterfaceList;
             return this;
         }
 
-        public Builder iconUrl(String iconUrl) {
+        public Builder withIconUrl(String iconUrl) {
             this.iconUrl = iconUrl;
             return this;
         }
 
-        public Builder agentProvider(AgentProvider agentProvider) {
+        public Builder withAgentProvider(AgentProvider agentProvider) {
             this.agentProvider = agentProvider;
             return this;
         }
 
-        public Builder agentCapability(AgentCapability agentCapability) {
+        public Builder withAgentCapability(AgentCapability agentCapability) {
             this.agentCapability = agentCapability;
             return this;
         }
 
-        public Builder securitySchemes(Map<String, Object> securitySchemes) {
+        public Builder withSecuritySchemes(Map<String, Object> securitySchemes) {
             this.securitySchemes = securitySchemes;
             return this;
         }
 
-        public Builder securityList(List<Security> securityList) {
+        public Builder withSecurityList(List<Security> securityList) {
             this.securityList = securityList;
             return this;
         }
 
-        public Builder agentCardSignatureList(List<AgentCardSignature> agentCardSignatureList) {
+        public Builder withAgentCardSignatureList(List<AgentCardSignature> agentCardSignatureList) {
             this.agentCardSignatureList = agentCardSignatureList;
             return this;
         }
 
-        public Builder defaultInputModes(List<String> defaultInputModes) {
+        public Builder withDefaultInputModes(List<String> defaultInputModes) {
             this.defaultInputModes = defaultInputModes;
             return this;
         }
 
-        public Builder defaultOutputModels(List<String> defaultOutputModels) {
+        public Builder withDefaultOutputModels(List<String> defaultOutputModels) {
             this.defaultOutputModels = defaultOutputModels;
             return this;
         }
 
-        public Builder supportsAuthenticatedExtendedCard(Boolean supportsAuthenticatedExtendedCard) {
+        public Builder withSupportsAuthenticatedExtendedCard(Boolean supportsAuthenticatedExtendedCard) {
             this.supportsAuthenticatedExtendedCard = supportsAuthenticatedExtendedCard;
             return this;
         }
 
-        public Builder agentSkillList(List<AgentSkill> agentSkillList) {
+        public Builder withAgentSkillList(List<AgentSkill> agentSkillList) {
             this.agentSkillList = agentSkillList;
             return this;
         }
 
-        public Builder id(String id) {
+        public Builder withId(String id) {
             this.id = id;
             return this;
         }
 
-        public Builder agentType(AgentType agentType) {
+        public Builder withAgentType(AgentType agentType) {
             this.agentType = agentType;
             return this;
         }
 
-        public Builder repository(String repository) {
+        public Builder withRepository(String repository) {
             this.repository = repository;
             return this;
         }
 
-        public Builder tagList(List<String> tagList) {
+        public Builder withTagList(List<String> tagList) {
             this.tagList = tagList;
             return this;
         }
 
-        public Builder qualifierList(List<String> qualifierList) {
+        public Builder withQualifierList(List<String> qualifierList) {
             this.qualifierList = qualifierList;
             return this;
         }

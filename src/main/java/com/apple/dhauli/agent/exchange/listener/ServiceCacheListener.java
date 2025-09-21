@@ -53,8 +53,6 @@ public class ServiceCacheListener implements CuratorCacheListener {
         Matcher serviceMatcher = servicePattern.matcher(data.getPath());
         if (serviceMatcher.matches()) {
             String serviceName = serviceMatcher.group(1);
-//                String[] path = data.getPath().split("/instances");
-//                String servicePath = path[0];
             String instanceId = serviceMatcher.group(2);
             String servicePath = "/dhauli/services/" + serviceName;
             String json_data = new String(data.getData(), StandardCharsets.UTF_8);
@@ -68,7 +66,7 @@ public class ServiceCacheListener implements CuratorCacheListener {
             logger.info("Adding instance: {} to service {}", instance, servicePath);
             serviceDiscoveryCacheService.addServiceInstance(servicePath, serviceName, instance);
         } else {
-            logger.info("Create Node is being skipped: {}", data.getPath());
+            logger.info("Create Service Node is being skipped: {}", data.getPath());
         }
     }
 
@@ -81,7 +79,7 @@ public class ServiceCacheListener implements CuratorCacheListener {
             logger.info("Removing instance: {} from service {}", instanceId, servicePath);
             serviceDiscoveryCacheService.removeServiceForPath(servicePath, instanceId);
         } else {
-            logger.info("Delete Node is being skipped: {}", data.getPath());
+            logger.info("Delete Service Node is being skipped: {}", data.getPath());
         }
     }
 }

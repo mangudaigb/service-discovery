@@ -1,6 +1,7 @@
 package com.apple.dhauli.agent.exchange.configuration;
 
 import com.apple.dhauli.agent.exchange.dao.instance.AgentInstance;
+import com.apple.dhauli.agent.exchange.dao.instance.MCPServerInstance;
 import com.apple.dhauli.agent.exchange.dao.instance.ServiceInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +43,22 @@ public class RedisConfig {
     public RedisTemplate<String, AgentInstance> agentRedisTemplate() {
         logger.info("Initialising Agent RedisTemplate");
         RedisTemplate<String, AgentInstance> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(redisConnectionFactory());
+
+        redisTemplate.setKeySerializer(new StringRedisSerializer());
+        redisTemplate.setValueSerializer(new GenericJackson2JsonRedisSerializer());
+
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new GenericJackson2JsonRedisSerializer());
+
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
+
+    @Bean
+    public RedisTemplate<String, MCPServerInstance> mcpServerRedisTemplate() {
+        logger.info("Initialising MCP Server RedisTemplate");
+        RedisTemplate<String, MCPServerInstance> redisTemplate = new RedisTemplate<>();
         redisTemplate.setConnectionFactory(redisConnectionFactory());
 
         redisTemplate.setKeySerializer(new StringRedisSerializer());

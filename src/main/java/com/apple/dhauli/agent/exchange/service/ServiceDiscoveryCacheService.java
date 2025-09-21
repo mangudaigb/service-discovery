@@ -69,7 +69,7 @@ public class ServiceDiscoveryCacheService {
 
     public void removeServiceForPath(String servicePath, String instanceId) {
         if (redisTemplate.hasKey(servicePath)) {
-            ServiceInstance serviceInstance = (ServiceInstance) redisTemplate.opsForValue().get(servicePath);
+            ServiceInstance serviceInstance = redisTemplate.opsForValue().get(servicePath);
             List<Instance> newServiceInstances = serviceInstance.getInstanceList().stream()
                     .filter(instance -> !instance.getId().equals(instanceId))
                     .toList();

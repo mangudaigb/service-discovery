@@ -32,6 +32,8 @@ dependencies {
 	implementation 'com.google.adk:google-adk-dev:0.2.0'
 //	implementation 'org.apache.zookeeper:zookeeper:3.9.2'
 	implementation 'redis.clients:jedis'
+	implementation "io.github.openfeign:feign-core:11.10"
+	implementation "io.github.openfeign:feign-gson:11.10"
 
 	implementation "org.apache.curator:curator-framework:$curatorVersion"
 	implementation "org.apache.curator:curator-recipes:$curatorVersion"
