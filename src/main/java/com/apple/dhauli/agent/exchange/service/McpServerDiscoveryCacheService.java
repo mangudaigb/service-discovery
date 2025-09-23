@@ -1,7 +1,6 @@
 package com.apple.dhauli.agent.exchange.service;
 
 import com.apple.dhauli.agent.exchange.client.McpFeignClient;
-import com.apple.dhauli.agent.exchange.dao.instance.AgentInstance;
 import com.apple.dhauli.agent.exchange.dao.instance.Instance;
 import com.apple.dhauli.agent.exchange.dao.instance.MCPServerInstance;
 import com.apple.dhauli.agent.exchange.dao.mcpserver.PromptDescriptor;
@@ -34,10 +33,10 @@ public class McpServerDiscoveryCacheService {
         return redisTemplate.hasKey(path);
     }
 
-    public List<MCPServerInstance> getMcpServerList() {
+    public List<MCPServerInstance> getAllMcpServers() {
         Set<String> keySet = redisTemplate.keys("/dhauli/mcps/*/instances/*");
-        if (!keySet.isEmpty()) {
-            logger.debug("Found {} instances in cache", keySet.size());
+        if (keySet.isEmpty()) {
+            logger.debug("No Mcp Servers registered in redis.");
             return new ArrayList<>();
         }
         List<MCPServerInstance> mcpInstanceList = redisTemplate.opsForValue().multiGet(keySet);

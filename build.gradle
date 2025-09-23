@@ -42,7 +42,7 @@ dependencies {
 //		exclude group: 'org.slf4j', module: 'slf4j-log4j12'
 //	}
 
-	implementation 'org.openapitools:agent-exchange-client:1.0.0'
+//	implementation 'org.openapitools:agent-exchange-client:1.0.0'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class ServiceDiscoveryCacheService {
@@ -29,10 +28,10 @@ public class ServiceDiscoveryCacheService {
         return redisTemplate.hasKey(servicePath);
     }
 
-    public List<ServiceInstance> getServiceInstancesForPath(String servicePath) {
-        Set<String> keySet = redisTemplate.keys("/dhauli/services/*/instances/*");
+    public List<ServiceInstance> getAllServices() {
+        Set<String> keySet = redisTemplate.keys("/dhauli/services/*");
         if (keySet.isEmpty()) {
-            logger.info("No services are registered in redis.");
+            logger.info("No Services are registered in redis.");
             return new ArrayList<>();
         }
         List<ServiceInstance> serviceInstanceList = redisTemplate.opsForValue().multiGet(keySet);

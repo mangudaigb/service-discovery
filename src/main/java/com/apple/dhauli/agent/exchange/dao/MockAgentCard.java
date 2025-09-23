@@ -3,6 +3,7 @@ package com.apple.dhauli.agent.exchange.dao;
 import com.apple.dhauli.agent.exchange.dao.agent.AgentCapability;
 import com.apple.dhauli.agent.exchange.dao.agent.AgentCard;
 import com.apple.dhauli.agent.exchange.dao.agent.AgentSkill;
+import com.apple.dhauli.agent.exchange.dao.agent.AgentType;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,6 +16,7 @@ public class MockAgentCard {
         AgentCapability agentCapability = new AgentCapability.Builder().streaming(true).build();
 
         AgentSkill skill1 = new AgentSkill.Builder()
+                .id(UUID.randomUUID().toString())
                 .name("Mock Convert english to odia")
                 .description("This agent converts english text to odia text based on odia literature of the 19th century")
                 .exampleList(List.of(new String[]{"example one", "example two"}))
@@ -31,6 +33,8 @@ public class MockAgentCard {
                 .withVersion("1.0")
                 .withAgentCapability(agentCapability)
                 .withAgentSkillList(List.of(skill1))
+                .withAgentType(AgentType.PLANNER)
+                .withRepository("http://some.repository.com")
                 .build();
         return agentCard;
     }

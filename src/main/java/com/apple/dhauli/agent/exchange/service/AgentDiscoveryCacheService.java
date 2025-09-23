@@ -5,7 +5,6 @@ import com.apple.dhauli.agent.exchange.dao.MockAgentCard;
 import com.apple.dhauli.agent.exchange.dao.agent.AgentCard;
 import com.apple.dhauli.agent.exchange.dao.instance.AgentInstance;
 import com.apple.dhauli.agent.exchange.dao.instance.Instance;
-import com.apple.dhauli.agent.exchange.exceptions.AgentExistsForPathException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Feign;
 import feign.FeignException;
@@ -36,10 +35,10 @@ public class AgentDiscoveryCacheService {
         return redisTemplate.hasKey(agentPath);
     }
 
-    public List<AgentInstance> getAllAgentInstances() {
-        Set<String> keySet = redisTemplate.keys("/dhauli/services/*/instances/*");
-        if (!keySet.isEmpty()) {
-            logger.info("No services registered in redis.");
+    public List<AgentInstance> getAllAgents() {
+        Set<String> keySet = redisTemplate.keys("/dhauli/agents/*");
+        if (keySet.isEmpty()) {
+            logger.info("No Agents registered in redis.");
             return new ArrayList<>();
         }
         List<AgentInstance> agentInstanceList = redisTemplate.opsForValue().multiGet(keySet);
@@ -52,7 +51,7 @@ public class AgentDiscoveryCacheService {
     }
 
     public List<AgentInstance> getAllAgentInstancesForName(String agentName) {
-        Set<String> keySet = redisTemplate.keys("/dhauli/services/" + agentName + "/instances/*");
+        Set<String> keySet = redisTemplate.keys("/dhauli/agents/" + agentName + "/instances/*");
         if (!keySet.isEmpty()) {
             logger.info("No services registered for the agent in redis.");
             return new ArrayList<>();

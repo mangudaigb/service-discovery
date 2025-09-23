@@ -1,11 +1,13 @@
 package com.apple.dhauli.agent.exchange.dao.instance;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Instance {
     private String id;
     private String fqdn;
@@ -17,6 +19,7 @@ public class Instance {
     private String topicName;
     private List<Integer> partitionList = new ArrayList<Integer>();
     private String version;
+    private String healthUrl;
 
     public String getId() {
         return id;
@@ -90,5 +93,16 @@ public class Instance {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public String getFqdnUrl() {
         return protocol + "://" + fqdn + ":" + port;
+    }
+
+    public String getHealthUrl() {
+        if (healthUrl == null || healthUrl.isEmpty()) {
+            return getUrl() + "/health";
+        }
+        return healthUrl;
+    }
+
+    public void setHealthUrl(String healthUrl) {
+        this.healthUrl = healthUrl;
     }
 }
