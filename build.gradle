@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.apple.dhauli'
 version = '0.0.1-SNAPSHOT'
-description = 'agent exxchange'
+description = 'agent. mcp, service discovery service'
 
 java {
 	toolchain {
